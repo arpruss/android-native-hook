@@ -1,3 +1,4 @@
+make
 adb shell su -c killall com.plankpad.plankpad
 adb shell su -c rm /data/local/tmp/hook-yrotation.so
 adb push hook-yrotation.so /data/local/tmp/

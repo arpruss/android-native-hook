@@ -7,20 +7,11 @@ AS=$(target_host)-clang
 CC=$(target_host)-clang
 CXX=$(target_host)-clang++
 LD=$(target_host)-ld
-STRIP=$target_host-strip
+STRIP=$(target_host)-strip
 
 # Tell configure what flags Android requires.
 CFLAGS=-pie -fPIC -O3 -landroid -I$(INC)
 LDFLAGS=-pie
-
-$(EXECUTABLE): $(OBJECTS) 
-	#(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -I$(INC) -o $@
-
-.c.o:
-	$(CXX) $(CFLAGS) $< -o $@
-
-.cpp.o:
-	$(CXX) $(CFLAGS) $< -o $@
 
 %.so: %.c
 	$(CC) --shared $(CFLAGS) $(LDFLAGS) $(OBJECTS) $< -o $@
