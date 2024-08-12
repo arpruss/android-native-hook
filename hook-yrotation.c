@@ -46,7 +46,7 @@ ssize_t ASensorEventQueue_getEvents(ASensorEventQueue* queue, ASensorEvent* even
 //			double x = 2 * (e->data[3]*e->data[1]+e->data[0]*e->data[2]);
 //			double y = 2 * (-e->data[3]*e->data[0]+e->data[1]*e->data[2]);
 //			double z = e->data[3]*e->data[3]-e->data[0]*e->data[0]-e->data[1]*e->data[1]+e->data[2]*e->data[2];
-//			__android_log_print(ANDROID_LOG_VERBOSE, "hook", "[0,0,1] to %lg,%lg,%lg", x,y,z);
+//			__android_log_print(ANDROID_LOG_VERBOSE, "hook", "[0,0,1] to %lg,%lg,%lg %lg %lg", x,y,z,atan2(y,z),gravityAngle);
 			
 			
 //			yzAngle = atan2(e->vector.z,e->vector.x);
