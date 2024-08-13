@@ -22,12 +22,16 @@ ssize_t ASensorEventQueue_getEvents(ASensorEventQueue* queue, ASensorEvent* even
 	ssize_t n = old_ASensorEventQueue_getEvents(queue, events, count);
 	for (ssize_t i = 0 ; i < n ; i++) {
 		ASensorEvent* e = events+i;
-		if (e->type == ASENSOR_TYPE_ROTATION_VECTOR) {
+		//__android_log_print(ANDROID_LOG_VERBOSE, "hook", "type %d", e->type);
+		if (e->type == ASENSOR_TYPE_ROTATION_VECTOR || e->type == ASENSOR_TYPE_GAME_ROTATION_VECTOR) {
 			double y = yTilt(e->data[0],e->data[1],e->data[2],e->data[3]);
 			double angle = asin(y);
 			e->data[0] = 0;
 			e->data[1] = sin(angle/2);
 			e->data[2] = cos(angle/2);
+		}
+		else if (e->type == ASENSOR_TYPE_GRAVITY || e->type == ASENSOR_TYPE_ACCELEROMETER) {
+			e->data[0] = 0;
 		}
 	}
 	return n;
